@@ -69,7 +69,7 @@ __global__ void concat_variable_kernel(
   IntType num_inputs = input_ptr_data.size;
 
   // verbose declaration needed due to template
-  extern __shared__ __align__(sizeof(T)) unsigned char smem[];
+  extern __shared__ unsigned char smem[];
   IntType* smem_col_scan = reinterpret_cast<IntType*>(smem);
 
   if (useSmem) {

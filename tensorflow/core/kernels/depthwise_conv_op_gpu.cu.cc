@@ -163,7 +163,7 @@ __global__ __launch_bounds__(1024, 2) void DepthwiseConv2dGPUKernelNHWCSmall(
     const DepthwiseArgs args, const T* input, const T* filter, T* output) {
   assert(CanLaunchDepthwiseConv2dGPUSmall(args));
   // Holds block plus halo and filter data for blockDim.x depths.
-  extern __shared__ __align__(sizeof(T)) unsigned char shared_memory[];
+  extern __shared__ unsigned char shared_memory[];
   T* const shared_data = reinterpret_cast<T*>(shared_memory);
 
   const int batches = args.batch;
@@ -433,7 +433,7 @@ __global__ __launch_bounds__(1024, 2) void DepthwiseConv2dGPUKernelNCHWSmall(
     const DepthwiseArgs args, const T* input, const T* filter, T* output) {
   assert(CanLaunchDepthwiseConv2dGPUSmall(args));
   // Holds block plus halo and filter data for blockDim.z depths.
-  extern __shared__ __align__(sizeof(T)) unsigned char shared_memory[];
+  extern __shared__ unsigned char shared_memory[];
   T* const shared_data = reinterpret_cast<T*>(shared_memory);
 
   const int batches = args.batch;
@@ -1051,7 +1051,7 @@ __launch_bounds__(1024, 2) void DepthwiseConv2dBackpropFilterGPUKernelNHWCSmall(
     const DepthwiseArgs args, const T* output, const T* input, T* filter) {
   assert(CanLaunchDepthwiseConv2dBackpropFilterGPUSmall(args, blockDim.z));
   // Holds block plus halo and filter data for blockDim.x depths.
-  extern __shared__ __align__(sizeof(T)) unsigned char shared_memory[];
+  extern __shared__ unsigned char shared_memory[];
   T* const shared_data = reinterpret_cast<T*>(shared_memory);
 
   const int batches = args.batch;
@@ -1310,7 +1310,7 @@ __launch_bounds__(1024, 2) void DepthwiseConv2dBackpropFilterGPUKernelNCHWSmall(
     const DepthwiseArgs args, const T* output, const T* input, T* filter) {
   assert(CanLaunchDepthwiseConv2dBackpropFilterGPUSmall(args, blockDim.x));
   // Holds block plus halo and filter data for blockDim.z depths.
-  extern __shared__ __align__(sizeof(T)) unsigned char shared_memory[];
+  extern __shared__ unsigned char shared_memory[];
   T* const shared_data = reinterpret_cast<T*>(shared_memory);
 
   const int batches = args.batch;
